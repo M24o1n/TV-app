@@ -9,10 +9,11 @@ class MyList extends StatefulWidget {
 class _MyListState extends State<MyList> {
   @override
   Map data = {};
-
-  Widget listBody() {
+  List<Widget> template = [];
+  List<Widget> templateEmpty = [];
+  List<Widget> listBody() {
     if (data.isEmpty) {
-      return Padding(
+      templateEmpty.add(Padding(
         padding: const EdgeInsets.only(top: 20.0),
         child: Center(
           child: Text(
@@ -24,9 +25,10 @@ class _MyListState extends State<MyList> {
             ),
           ),
         ),
-      );
+      ));
+      return templateEmpty;
     } else {
-      return Column(
+      template.add(Column(
         children: [
           Padding(
             padding: const EdgeInsets.symmetric(vertical: 1.0, horizontal: 4.0),
@@ -45,7 +47,8 @@ class _MyListState extends State<MyList> {
             ),
           )
         ],
-      );
+      ));
+      return template;
     }
   }
 
@@ -74,9 +77,7 @@ class _MyListState extends State<MyList> {
           centerTitle: true,
         ),
         body: Column(
-          children: <Widget>[
-            listBody(),
-          ],
+          children: listBody(),
         ));
   }
 }
